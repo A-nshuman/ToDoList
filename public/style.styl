@@ -1,0 +1,113 @@
+@import 'rupture'
+
+dark = #202020
+blue = #84d5ed
+lime = #b3d23e
+light = #3f3f3f
+white = #f5f5f5
+yellow = #ffcc33
+dull-red = #FF6666
+bright-red = #df2525
+
+dispGrid()
+    display grid
+    place-items center
+
+dispFlex(dir, gap = 5, align = center, just = center)
+    display flex
+    flex-direction dir
+    align-items align
+    justify-content just
+    gap unit(gap, 'px')
+
+rupture.scale = 0 300px 500px 700px
+
+*
+    margin 0
+    padding 0
+    transition all 0.2s ease
+
+body
+    dispGrid()
+    background-color dark
+    width 100%
+    height 100dvh
+    color white
+    font-family 'Roboto', sans-serif
+
+    .container
+        dispFlex(column, 10, start)
+        padding 10px
+        width 500px
+
+        +below(2)
+            width 300px
+
+        form
+            dispFlex(row, 10, center, center)
+            width 100%
+
+            .new-task-title
+                color light
+                flex 1
+                border 2px solid light
+                padding 0.5rem 1rem
+                border-radius 10px
+                background dark
+
+                &:focus
+                    outline none
+                    background light
+                    color invert(light)
+            
+            button
+                color light
+                background yellow
+                border-radius 10px
+                border 2px solid @background
+                padding 0.5rem 1rem
+                cursor pointer
+
+                &:hover
+                    background transparent
+                    color yellow
+
+        #list
+            width 100%
+            list-style none
+            dispFlex(column, 10, start, start)
+
+            li
+                width 100%
+                background-color blue
+                border-radius 10px
+
+                label
+                    padding 0.5rem 1rem
+                    dispFlex(row, 10, center, space-between)
+                    font-size 25px
+                    color dark
+
+                    .check-box
+                        width 30px
+                        aspect-ratio 1
+
+                    .taskTitle
+                        flex 1
+                        overflow-x scroll
+                        scrollbar-color transparent transparent
+                        scrollbar-width none
+                        mask: linear-gradient(-90deg, transparent 0%, #f5f5f5 20%);
+                        -webkit-mask: linear-gradient(-90deg, transparent 0%, #f5f5f5 20%);
+
+                    .deleteBtn
+                        border-radius 5px
+                        background dull-red
+                        border 2px solid @background
+                        color white
+                        cursor pointer
+
+                        &:hover
+                            background bright-red
+                            border-color @background
+                            scale 1.1
